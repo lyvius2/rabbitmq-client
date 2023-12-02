@@ -20,6 +20,6 @@ management:
     web:
       exposure:
         include: prometheus, health, info, metrics
-  metrics:
-    tags:
+  observations:
+    key-values:
       application: ${spring.application.name}
