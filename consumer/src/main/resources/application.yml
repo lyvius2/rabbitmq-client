@@ -1,1 +1,38 @@
+server:
+  port: 9099
 
+spring:
+  application:
+    name: Consumer for RabbitMQ
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    open-in-view: true
+    generate-ddl: true
+    defer-datasource-initialization: true
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+  rabbitmq:
+    host: 127.0.0.1
+    port: 15672
+    username: consumer
+    password: 4321
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health, info, metrics
+  observations:
+    key-values:
+      application: ${spring.application.name}
