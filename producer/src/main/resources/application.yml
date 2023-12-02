@@ -1,1 +1,25 @@
+server:
+  port: 7071
 
+spring:
+  application:
+    name: Producer for RabbitMQ
+  rabbitmq:
+    host: 127.0.0.1
+    port: 15672
+    username: producer
+    password: 1234
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health, info, metrics
+  metrics:
+    tags:
+      application: ${spring.application.name}
