@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.12.10-management
+    container_name: rabbitmq-local-dev
+    ports:
+      - "15672:5672"
+      - "25672:15672"
+    expose:
+      - "5672"
+      - "15672"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=pwd1234!
+      - TZ=Asia/Seoul
+    mem_limit: "256mb"
