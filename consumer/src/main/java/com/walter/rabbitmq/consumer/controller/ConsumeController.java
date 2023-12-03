@@ -1,28 +1,48 @@
 package com.walter.rabbitmq.consumer.controller;
 
-import com.walter.rabbitmq.consumer.listener.vo.ProductV1;
-import com.walter.rabbitmq.consumer.service.ConsumeService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.walter.rabbitmq.consumer.controller.vo.ResultV1;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/read")
-@Tag(name = "저장된 메시지 조회")
+@RequestMapping("/listener")
 public class ConsumeController {
-	private final ConsumeService consumeService;
+    private final SimpleMessageListenerContainer simpleMessageListenerContainer;
 
-	public ConsumeController(ConsumeService consumeService) {
-		this.consumeService = consumeService;
-	}
+    public ConsumeController(SimpleMessageListenerContainer simpleMessageListenerContainer) {
+        this.simpleMessageListenerContainer = simpleMessageListenerContainer;
+    }
 
-	@Operation(summary = "Read API", description = "DB에 적재된 메시지를 조회")
-	@GetMapping("/consoles")
-	public List<ProductV1> getConsoles() {
-		return consumeService.getProducts();
-	}
+    @PutMapping("/stop")
+    public ResultV1 stop() {
+        final boolean isActive = simpleMessageListenerContainer.isActive();
+        if (!isActive) {
+            return ResultV1.of(false);
+        }
+        return listeningSwitch();
+    }
+
+    @PutMapping("/start")
+    public ResultV1 start() {
+        final boolean isActive = simpleMessageListenerContainer.isActive();
+        if (isActive) {
+            return ResultV1.of(true);
+        }
+        return listeningSwitch();
+    }
+
+    private ResultV1 listeningSwitch() {
+        try {
+            if (simpleMessageListenerContainer.isActive()) {
+                simpleMessageListenerContainer.stop();
+            } else {
+                simpleMessageListenerContainer.start();
+            }
+            return ResultV1.of(simpleMessageListenerContainer.isActive());
+        } catch (Exception e) {
+            return ResultV1.of(simpleMessageListenerContainer.isActive(), e.getMessage());
+        }
+    }
 }

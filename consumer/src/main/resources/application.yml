@@ -20,8 +20,8 @@ spring:
   rabbitmq:
     host: 127.0.0.1
     port: 15672
-    username: consumer
-    password: 4321
+    username: user
+    password: pwd1234!
 
 management:
   endpoint:

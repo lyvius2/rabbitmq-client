@@ -1,7 +1,7 @@
 package com.walter.rabbitmq.consumer.service;
 
 import com.walter.rabbitmq.consumer.entity.Product;
-import com.walter.rabbitmq.consumer.listener.vo.ProductV1;
+import com.walter.rabbitmq.consumer.controller.vo.ProductV1;
 import com.walter.rabbitmq.consumer.mapper.ProductMapper;
 import com.walter.rabbitmq.consumer.repository.ProductRepository;
 import org.springframework.stereotype.Service;

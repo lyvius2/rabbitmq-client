@@ -2,7 +2,7 @@ package com.walter.rabbitmq.consumer.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
-import com.walter.rabbitmq.consumer.listener.vo.ProductV1;
+import com.walter.rabbitmq.consumer.controller.vo.ProductV1;
 import com.walter.rabbitmq.consumer.service.ConsumeService;
 import com.walter.rabbitmq.consumer.utils.JsonEscapeUtil;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.walter.rabbitmq.consumer.listener.vo;
+package com.walter.rabbitmq.consumer.controller.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

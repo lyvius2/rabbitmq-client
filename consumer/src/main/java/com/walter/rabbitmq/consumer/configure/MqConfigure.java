@@ -17,6 +17,7 @@ public class MqConfigure {
 		listenerContainer.setQueueNames(QUEUE_NAMES);
 		listenerContainer.setConcurrentConsumers(10);
 		listenerContainer.setMessageListener(messageListener);
+		listenerContainer.setAutoStartup(false);
 		return listenerContainer;
 	}
 }

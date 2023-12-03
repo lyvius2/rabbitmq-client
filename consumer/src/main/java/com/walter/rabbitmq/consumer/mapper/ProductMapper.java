@@ -1,7 +1,7 @@
 package com.walter.rabbitmq.consumer.mapper;
 
 import com.walter.rabbitmq.consumer.entity.Product;
-import com.walter.rabbitmq.consumer.listener.vo.ProductV1;
+import com.walter.rabbitmq.consumer.controller.vo.ProductV1;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
