@@ -15,6 +15,7 @@ public class MqConfigure {
 		final SimpleMessageListenerContainer listenerContainer = new SimpleMessageListenerContainer();
 		listenerContainer.setConnectionFactory(connectionFactory);
 		listenerContainer.setQueueNames(QUEUE_NAMES);
+		listenerContainer.setConcurrentConsumers(10);
 		listenerContainer.setMessageListener(messageListener);
 		return listenerContainer;
 	}
